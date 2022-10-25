@@ -1,0 +1,39 @@
+---
+
+# - name: Make hostname compliant
+#   hosts: all
+#   tasks:
+#     - name: Set hostname
+#       shell: hostname -f | xargs -I{} hostnamectl set-hostname {}
+#   tags:
+#     - set-hostname
+
+- name: Install nfs util
+  hosts: all
+  tasks:
+    - name: Install nfs-utils
+      yum:
+        name: nfs-utils
+        state: latest
+  tags:
+    - nfs-util
+
+# - name: Grow /var filesystem
+#   hosts: all
+#   tasks:
+#     - name: Resize LV
+#       shell: lvextend -L30G /dev/vg00/var
+#       ignore_errors: yes
+#     - name: Grow filesystem
+#       shell: xfs_growfs /var
+#   tags:
+#     - var-fs-grow
+
+
+- name: Reboot nodes
+  hosts: all
+  tasks:
+    - name: Reboot
+      reboot:
+  tags:
+    - reboot

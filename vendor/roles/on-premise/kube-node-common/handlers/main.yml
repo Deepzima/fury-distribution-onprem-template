@@ -1,0 +1,19 @@
+---
+
+- name: Clean yum cache
+  command: /usr/bin/yum clean all
+  args:
+    warn: false
+
+- name: Restart journald
+  systemd:
+    name: systemd-journald
+    state: restarted
+  listen: Restart journald
+
+- name: Restart Kubelet
+  systemd:
+    name: kubelet
+    state: restarted
+    daemon_reload: yes
+  listen: Restart kubelet

@@ -1,0 +1,10 @@
+versions:
+  on-premise: v1.23.12
+
+roles:
+  - name: on-premise
+  # - name: on-premise/containerd
+  # - name: on-premise/etcd
+  # - name: on-premise/kube-control-plane
+  # - nome: on-premise/kube-node-common
+  # - nome: on-premise/kube-worker

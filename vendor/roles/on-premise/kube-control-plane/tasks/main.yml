@@ -1,0 +1,73 @@
+---
+
+- name: Ensuring audit folder is present on machine
+  file:
+    name: "{{ audit_log_dir }}"
+    state: directory
+
+- name: Ensuring audit config file is present on machine
+  copy:
+    src: audit.yml
+    dest: "{{ audit_policy_config_path }}"
+
+- name: Ensuring kubeadm.yml config file is present on machine
+  template:
+    src: kubeadm.yml.j2
+    dest: "{{ kubeadm_config_file }}"
+
+- name: Ensuring kubeconfig variable
+  copy:
+    src: kube.sh
+    dest: /etc/profile.d/kube.sh
+
+- name: Check that the /etc/kubernetes/admin.conf exists
+  stat:
+    path: /etc/kubernetes/admin.conf
+  register: stat_result
+
+- name: Initializing master
+  command: "kubeadm init --config={{ kubeadm_config_file }}"
+  when:
+    - not stat_result.stat.exists
+
+- name: Getting bootstrap token
+  shell: "kubeadm token create --ttl=30m"
+  register: kubernetes_bootstrap_token
+
+- name: Getting Kubernetes CA hash
+  shell: "openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* /sha256:/'"
+  register: kubernetes_ca_hash
+
+- name: Creating users kubeconfig folder
+  file:
+    name: "{{ kubernetes_users_kubeconfig_dir }}"
+    state: directory
+
+- name: Creating Kubernetes Users with kubeadm
+  shell: "kubeadm kubeconfig user --config={{ kubeadm_config_file }} --client-name={{item}} --org={{kubernetes_users_org}} > {{ kubernetes_users_kubeconfig_dir }}/{{item}}.kubeconfig"
+  with_items: "{{ kubernetes_users_names }}"
+
+- name: Fix Kuberneters API server address in generated kubeconfigs
+  replace:
+    path: "{{ kubernetes_users_kubeconfig_dir }}/{{item}}.kubeconfig"
+    regexp: '^(\s*server: https://).*$'
+    replace: '\1{{ kubernetes_control_plane_address }}'
+  with_items:  "{{ kubernetes_users_names }}"
+
+- name: Getting kubeconfig files from master
+  run_once: true
+  fetch:
+    src: "{{ kubernetes_users_kubeconfig_dir }}/{{item}}.kubeconfig"
+    dest: "{{ kubernetes_kubeconfig_path }}/{{item}}.kubeconfig"
+    flat: true
+  with_items:  "{{ kubernetes_users_names }}"
+
+- name: Getting admin.conf kubeconfig
+  run_once: true
+  fetch:
+    src: /etc/kubernetes/admin.conf
+    dest: "{{ kubernetes_kubeconfig_path }}/admin.conf"
+    flat: yes
+
+- include_tasks: upgrade.yml
+  when: upgrade

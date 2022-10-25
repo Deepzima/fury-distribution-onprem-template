@@ -1,0 +1,43 @@
+---
+- name: be sure firewalld is disabled
+  systemd: name=firewalld enabled=no
+  when: ansible_os_family in ['RedHat', 'Rocky']
+
+- name: be sure firewalld is stopped
+  systemd: name=firewalld state=stopped
+  ignore_errors: yes
+  when: ansible_os_family in ['RedHat', 'Rocky']
+
+- name: Set package version separator on RedHat
+  set_fact:
+    _pkg_sep: "-"
+  when: ansible_os_family in ['RedHat', 'Rocky']
+
+- name: Set package version separator on Debian/Ubuntu
+  set_fact:
+    _pkg_sep: "="
+  when: ansible_os_family == 'Debian'
+
+- name: Set Kubernetes package version suffix on RedHat
+  set_fact:
+    _pkg_suffix: ""
+  when: ansible_os_family in ['RedHat', 'Rocky']
+
+- name: Set Kubernetes package version suffix on Debian/Ubuntu
+  set_fact:
+    _pkg_suffix: "-00"
+  when: ansible_os_family == 'Debian'
+
+- name: Set conntrack kernel module name on Ubuntu 18
+  set_fact:
+    _conntrack_module_name: "nf_conntrack_ipv4"
+  when: ansible_facts['distribution_major_version'] <= "18"
+
+- name: Set conntrack kernel module name on Ubuntu 20
+  set_fact:
+    _conntrack_module_name: "nf_conntrack"
+  when: ansible_facts['distribution_major_version'] > "18"
+
+- include_tasks: "repo-{{ ansible_os_family }}.yml"
+
+- include_tasks: node.yml
