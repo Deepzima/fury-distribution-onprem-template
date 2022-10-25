@@ -1,0 +1,111 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-manager-cainjector
+  namespace: cert-manager
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node-role.kubernetes.io/role
+        value: infra
+        operator: Equal
+        effect: NoSchedule
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node-role.kubernetes.io/role
+        value: infra
+        operator: Equal
+        effect: NoSchedule
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-manager-webhook
+  namespace: cert-manager
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node-role.kubernetes.io/role
+        value: infra
+        operator: Equal
+        effect: NoSchedule
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: forecastle
+  namespace: ingress-nginx
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node.kubernetes.io/role
+        value: infra
+        operator: Equal
+        effect: NoSchedule
+# ---
+# apiVersion: apps/v1
+# kind: DaemonSet
+# metadata:
+#   name: nginx-ingress-controller-internal
+#   namespace: ingress-nginx
+# spec:
+#   template:
+#     spec:
+#       nodeSelector:
+#         node.kubernetes.io/role: "infra"
+#       tolerations:
+#       - key: node-role.kubernetes.io/role
+#         value: infra
+#         operator: Equal
+#         effect: NoSchedule
+# ---
+# apiVersion: apps/v1
+# kind: DaemonSet
+# metadata:
+#   name: nginx-ingress-controller-external
+#   namespace: ingress-nginx
+# spec:
+#   template:
+#     spec:
+#       nodeSelector:
+#         node.kubernetes.io/role: "infra"
+#       tolerations:
+#       - key: node-role.kubernetes.io/role
+#         value: infra
+#         operator: Equal
+#         effect: NoSchedule
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-ingress-controller
+  namespace: ingress-nginx
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: infra
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+        key: node-role.kubernetes.io/infra

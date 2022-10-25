@@ -1,0 +1,37 @@
+---
+bases:
+- ../../../vendor/katalog/ingress/cert-manager
+- ../../../vendor/katalog/ingress/forecastle
+# - ../../../vendor/katalog/ingress/dual-nginx
+- ../../../vendor/katalog/ingress/nginx
+
+resources:
+ - resources/ingress.yml
+
+
+# patchesJSON6902:
+# - target:
+#     group: apps
+#     version: v1
+#     kind: DaemonSet
+#     name: nginx-ingress-controller
+#     namespace: ingress-nginx
+#   path: patchesjson/ingress-nginx.yml
+# - target:
+#     group: apps
+#     version: v1
+#     kind: DaemonSet
+#     name: nginx-ingress-controller-internal
+#     namespace: ingress-nginx
+#   path: patchesjson/ingress-nginx-internal.yml
+# - target:
+#     group: apps
+#     version: v1
+#     kind: DaemonSet
+#     name: nginx-ingress-controller-external
+#     namespace: ingress-nginx
+#   path: patchesjson/ingress-nginx-external.yml
+
+
+patchesStrategicMerge:
+- patches/scheduling.yml

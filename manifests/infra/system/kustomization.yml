@@ -1,0 +1,15 @@
+
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+- name: domain-ssl
+  namespace: kube-system
+  type: kubernetes.io/tls
+  files:
+  - ca.crt=secrets/wildcard.domain.it.ca.crt
+  - tls.crt=secrets/wildcard.domain.it.crt
+  - tls.key=wsecrets/ildcard.domain.it.key
+
+

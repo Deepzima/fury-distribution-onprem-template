@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Forecastle"
+    forecastle.stakater.com/icon: "https://github.com/stakater/Forecastle/raw/master/assets/web/forecastle-round-100px.png"
+  name: forecastle
+  namespace: ingress-nginx
+spec:
+  rules:
+  - host: directory.nomecluster.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: forecastle
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - directory.nomecluster.domain.it
