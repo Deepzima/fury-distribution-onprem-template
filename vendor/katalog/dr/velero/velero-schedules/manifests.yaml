@@ -1,0 +1,26 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: manifests
+spec:
+  schedule: "*/15 * * * *"
+  template:
+    includedNamespaces:
+    - '*'
+    excludedNamespaces: null
+    includedResources:
+    - '*'
+    excludedResources: null
+    includeClusterResources: true
+    labelSelector: null
+    snapshotVolumes: false
+    storageLocation: default
+    volumeSnapshotLocations: []
+    ttl: 720h0m0s
+    hooks:
+      resources: []

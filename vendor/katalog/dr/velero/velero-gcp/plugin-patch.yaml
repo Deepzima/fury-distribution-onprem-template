@@ -1,0 +1,30 @@
+# Copyright (c) 2020 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velero
+spec:
+  template:
+    spec:
+      initContainers:
+      - image: velero/velero-plugin-for-gcp
+        imagePullPolicy: Always
+        name: velero-plugin
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - mountPath: /target
+          name: plugins
+      - image: velero/velero-plugin-for-csi
+        imagePullPolicy: Always
+        name: velero-plugin-csi
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - mountPath: /target
+          name: plugins
+
