@@ -66,4 +66,6 @@ images:
   - name: registry.sighup.io/fury/bloomberg/goldpinger:v3.3.0
     newName: registry.sighup.io/fury/bloomberg/goldpinger
     newTag: v3.3.0
-
+  - name: registry.sighup.io/fury/enix/x509-certificate-exporter:2.12.1
+    newName: registry.sighup.io/fury/enix/x509-certificate-exporter
+    newTag: 2.12.1
