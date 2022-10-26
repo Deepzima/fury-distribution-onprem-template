@@ -1,6 +1,6 @@
 
 ---
-
+namespace: logging
 bases:
   - ../../../vendor/katalog/logging/logging-operator
   - ../../../vendor/katalog/logging/logging-operated
@@ -17,6 +17,7 @@ patchesStrategicMerge:
 - patches/flows/events/output.yml
 
 resources:
+- resources/ns.yml
 - patches/flows/ingress/output.yml
 
 
