@@ -43,3 +43,6 @@ images:
   - name: registry.sighup.io/fury/banzaicloud/fluentd:v1.14.6-alpine-5
     newName: registry.sighup.io/fury/groundnuty/k8s-wait-for
     newTag: v0.4.0
+  - name: registry.sighup.io/fury/fluent/fluent-bit:1.6.1
+    newName: registry.sighup.io/fury/groundnuty/k8s-wait-for
+    newTag: 1.6.1
