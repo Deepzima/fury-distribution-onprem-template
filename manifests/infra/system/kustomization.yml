@@ -1,9 +1,9 @@
 
-configMapGenerator:
-- name: domain-chain-tls
-  namespace: kube-system
-  files:
-    - domain-chain.crt=resources/domain-chain.crt
+# configMapGenerator:
+# - name: domain-chain-tls
+#   namespace: kube-system
+#   files:
+#     - domain-chain.crt=resources/domain-chain.crt
 
 generatorOptions:
   disableNameSuffixHash: true

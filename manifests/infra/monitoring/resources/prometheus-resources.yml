@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  labels:
+    prometheus: k8s
+  name: k8s
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: nome_nodo
+  volumes:
+    - emptyDir:
+        medium: Memory
+      name: prometheus-k8s-db
+  volumeMounts:
+    - mountPath: /prometheus
+      name: prometheus-k8s-db
+  resources:
+    limits:
+      memory: 1500Mi
+  retention: 1d
+  

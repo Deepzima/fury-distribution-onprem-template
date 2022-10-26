@@ -1,0 +1,106 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Grafana"
+    forecastle.stakater.com/icon: "https://github.com/stakater/ForecastleIcons/raw/master/grafana.png"
+  name: grafana
+  namespace: monitoring
+spec:
+  rules:
+  - host: grafana.clustername.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana
+            port:
+              name: http
+  tls:
+  - hosts:
+    - grafana.clustername.domain.it
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Goldpinger"
+    forecastle.stakater.com/icon: "https://avatars2.githubusercontent.com/u/1416818?s=200&v=4"
+  name: goldpinger
+  namespace: monitoring
+spec:
+  rules:
+  - host: goldpinger.clustername.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: goldpinger
+            port:
+              number: 8080
+  tls:
+  - hosts:
+    - goldpinger.clustername.domain.it
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Prometheus"
+    forecastle.stakater.com/icon: "https://github.com/stakater/ForecastleIcons/raw/master/prometheus.png"
+  name: prometheus
+  namespace: monitoring
+spec:
+  rules:
+  - host: prometheus.clustername.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-k8s
+            port:
+              name: web
+  tls:
+  - hosts:
+    - prometheus.clustername.domain.it
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Alertmanager"
+    forecastle.stakater.com/icon: "https://github.com/stakater/ForecastleIcons/raw/master/prometheus.png"
+  name: alertmanager
+  namespace: monitoring
+spec:
+  rules:
+  - host: alertmanager.clustername.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: alertmanager-main
+            port:
+              name: web
+  tls:
+  - hosts:
+    - alertmanager.clustername.domain.it

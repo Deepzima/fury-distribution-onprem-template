@@ -1,0 +1,32 @@
+---
+
+bases:
+
+- ../../../vendor/katalog/monitoring/configs/kubeadm
+# - ../../../vendor/katalog/monitoring/goldpinger
+- ../../../vendor/katalog/monitoring/grafana
+- ../../../vendor/katalog/monitoring/kube-state-metrics
+- ../../../vendor/katalog/monitoring/metrics-server
+- ../../../vendor/katalog/monitoring/node-exporter
+- ../../../vendor/katalog/monitoring/prometheus-operated
+- ../../../vendor/katalog/monitoring/prometheus-operator
+# - ../../../vendor/katalog/monitoring/alertmanager-operated
+- ./x509-exporter
+
+
+patchesStrategicMerge:
+- patches/scheduling.yml
+- patches/prometheus-resources.yml
+
+resources:
+- resources/monitoring-ingress.yml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+secretGenerator:
+- name: alertmanager-main
+  namespace: monitoring
+  files:
+    - alertmanager.yaml=secrets/alertmanager.yaml
+    - alertmanager.tmpl=secrets/alertmanager.tmpl

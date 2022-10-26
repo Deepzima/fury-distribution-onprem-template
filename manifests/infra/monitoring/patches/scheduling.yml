@@ -1,0 +1,86 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: infra
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+        key: node-role.kubernetes.io/infra
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metrics-server
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: infra
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+        key: node-role.kubernetes.io/infra
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-state-metrics
+  namespace: monitoring
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: infra
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+        key: node-role.kubernetes.io/infra
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-operator
+  namespace: monitoring
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: infra
+      tolerations:
+      - effect: NoSchedule
+        operator: Exists
+        key: node-role.kubernetes.io/infra
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: k8s
+  namespace: monitoring
+spec:
+  nodeSelector:
+    node.kubernetes.io/role: infra
+  tolerations:
+  - effect: NoSchedule
+    operator: Exists
+    key: node-role.kubernetes.io/infra
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: main
+  namespace: monitoring
+spec:
+  nodeSelector:
+    node.kubernetes.io/role: infra
+  tolerations:
+  - effect: NoSchedule
+    operator: Exists
+    key: node-role.kubernetes.io/infra
