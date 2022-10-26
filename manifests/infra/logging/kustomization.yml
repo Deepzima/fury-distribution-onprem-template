@@ -10,13 +10,11 @@ bases:
 patchesStrategicMerge:
 - patches/scheduling.yml
 - patches/flows/audit/output.yml
-
 - patches/flows/audit/sys-hosttailer.yml
 - patches/flows/audit/etcd-hosttailer.yml
 - patches/flows/kubernetes/k8s-flow.yml
 - patches/flows/kubernetes/cluster-output.yml
 - patches/flows/ingress/ingress-flow.yml
-- patches/flows/ingress/output.yml
 - patches/flows/events/output.yml
 - patches/logging-infra.yml
 
