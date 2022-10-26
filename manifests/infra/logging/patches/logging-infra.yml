@@ -4,7 +4,14 @@ kind: Logging
 metadata:
   name: infra
 spec:
+  fluentbit:
+    image:
+      repository: registry.sighup.io/fury/fluent/fluent-bit
+      tag: 1.9.5
   fluentd:
+    image:
+      repository: registry.sighup.io/fury/banzaicloud/fluentd
+      tag: v1.14.6-alpine-5
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
