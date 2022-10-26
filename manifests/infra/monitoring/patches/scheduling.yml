@@ -71,16 +71,16 @@ spec:
   - effect: NoSchedule
     operator: Exists
     key: node-role.kubernetes.io/infra
----
-apiVersion: monitoring.coreos.com/v1
-kind: Alertmanager
-metadata:
-  name: main
-  namespace: monitoring
-spec:
-  nodeSelector:
-    node.kubernetes.io/role: infra
-  tolerations:
-  - effect: NoSchedule
-    operator: Exists
-    key: node-role.kubernetes.io/infra
+# ---
+# apiVersion: monitoring.coreos.com/v1
+# kind: Alertmanager
+# metadata:
+#   name: main
+#   namespace: monitoring
+# spec:
+#   nodeSelector:
+#     node.kubernetes.io/role: infra
+#   tolerations:
+#   - effect: NoSchedule
+#     operator: Exists
+#     key: node-role.kubernetes.io/infra
