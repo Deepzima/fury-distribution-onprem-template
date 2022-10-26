@@ -59,12 +59,12 @@ spec:
             port: 9000
           initialDelaySeconds: 120
           periodSeconds: 20
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 10Gi
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: data
+  #   spec:
+  #     accessModes:
+  #       - ReadWriteOnce
+  #     resources:
+  #       requests:
+  #         storage: 10Gi

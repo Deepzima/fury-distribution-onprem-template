@@ -8,7 +8,13 @@ spec:
     spec:
       containers:
         - name: minio
+          volumeMounts:
+            - name: data
+              mountPath: /data      
           resources:
             limits:
-              cpu: 250m
-              memory: 256Mi
+              memory: 1000Mi
+      volumes:
+        - emptyDir:
+            medium: Memory
+          name: data
