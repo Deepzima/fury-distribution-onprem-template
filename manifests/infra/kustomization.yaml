@@ -1,8 +1,7 @@
 resources:
   - networking
-  # - system
-  # - ingress
-  # - logging
-  # - monitoring
-  # - opa
-  # - system
+  - system
+  - ingress
+  - logging
+  - monitoring
+  - opa
