@@ -10,7 +10,7 @@ bases:
 patchesStrategicMerge:
 - patches/scheduling.yml
 - patches/flows/audit/output.yml
-- patches/flows/audit/audit-hosttailer.yml
+
 - patches/flows/audit/sys-hosttailer.yml
 - patches/flows/audit/etcd-hosttailer.yml
 - patches/flows/kubernetes/k8s-flow.yml
@@ -18,12 +18,13 @@ patchesStrategicMerge:
 - patches/flows/ingress/ingress-flow.yml
 - patches/flows/ingress/output.yml
 - patches/flows/events/output.yml
-- patches/flows/events/kubernetes-eventtailer.yml
+- patches/logging-infra.yml
 
 resources:
 - resources/ns.yml
-- patches/flows/ingress/output.yml
-
+- resources/flows/audit/audit-hosttailer.yml
+- resources/flows/ingress/output.yml
+- resources/flows/events/kubernetes-eventtailer.yml
 
 images:
   - name: registry.sighup.io/fury/banzaicloud/logging-operator:3.17.7

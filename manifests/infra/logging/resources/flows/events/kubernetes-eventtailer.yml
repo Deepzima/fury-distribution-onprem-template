@@ -4,14 +4,10 @@
 
 ---
 apiVersion: logging-extensions.banzaicloud.io/v1alpha1
-kind: HostTailer
+kind: EventTailer
 metadata:
-  name: audit
+  name: kubernetes
 spec:
-  fileTailers:
-    - name: audit
-      containerOverrides:
-        image: registry.sighup.io/fury/fluent/fluent-bit:1.6.1
-
-
-
+  controlNamespace: logging
+  containerOverrides:
+    image: registry.sighup.io/fury/banzaicloud/eventrouter:v0.1.0
