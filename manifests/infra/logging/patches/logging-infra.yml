@@ -10,7 +10,7 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: node.kubernetes.io/role
+            - key: node-role.kubernetes.io/infra
               operator: In
               values:
               - infra
