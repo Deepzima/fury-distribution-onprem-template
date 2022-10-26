@@ -8,6 +8,9 @@ spec:
     image:
       repository: registry.sighup.io/fury/fluent/fluent-bit
       tag: 1.9.5
+    configReloaderImage:
+      repository: registry.sighup.io/fury/jimmidyson/configmap-reload
+      tag: v0.4.0
   fluentd:
     image:
       repository: registry.sighup.io/fury/banzaicloud/fluentd
