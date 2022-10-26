@@ -1,0 +1,21 @@
+---
+bases:
+- resources/dex
+- resources/gangway
+
+patchesStrategicMerge:
+- patches/scheduling.yml
+- patches/gangway.yml
+
+resources:
+- resources/on-premises-ingress.yml
+
+secretGenerator:
+- name: dex
+  namespace: kube-system
+  files:
+  - config.yml=secrets/dex.yml
+- name: gangway
+  namespace: kube-system
+  files:
+  - secrets/gangway.yml

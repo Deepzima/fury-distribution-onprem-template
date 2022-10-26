@@ -1,0 +1,53 @@
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Dex"
+    forecastle.stakater.com/icon: "https://github.com/dexidp/dex/raw/master/Documentation/logos/dex-glyph-color.png"
+  name: dex
+  namespace: kube-system
+spec:
+  rules:
+  - host: dex.nomecluster.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dex
+            port:
+              name: 80
+  tls:
+  - hosts:
+    - dex.nomecluster.domain.it
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Dex"
+    forecastle.stakater.com/icon: "https://github.com/dexidp/dex/raw/master/Documentation/logos/dex-glyph-color.png"
+  name: gangway
+  namespace: kube-system
+spec:
+  rules:
+  - host: auth.nomecluster.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gangway-svc
+            port:
+              name: 80
+  tls:
+  - hosts:
+    - auth.nomecluster.domain.it

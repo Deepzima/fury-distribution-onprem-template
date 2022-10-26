@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    forecastle.stakater.com/expose: "true"
+    forecastle.stakater.com/appName: "Gatekeep Policy Manager"
+  name: gatekeeper-policy-manager
+  namespace: gatekeeper-system
+spec:
+  rules:
+  - host: gpm.domain.it
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: gatekeeper-policy-manager
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - gpm.domain.it

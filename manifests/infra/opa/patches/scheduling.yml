@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gatekeeper-audit
+  namespace: gatekeeper-system
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gatekeeper-controller-manager
+  namespace: gatekeeper-system
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gatekeeper-policy-manager
+  namespace: gatekeeper-system
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule

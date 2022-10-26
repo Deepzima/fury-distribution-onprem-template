@@ -1,0 +1,20 @@
+
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: "nfs4-infra-exam"
+#   annotations:    
+#     storageclass.kubernetes.io/is-default-class: "false"  
+# provisioner: nfs4-infra-provisioner
+# allowVolumeExpansion: true
+# reclaimPolicy: Delete
+# parameters:
+#   archiveOnDelete: "false"  
+#   onDelete: "delete"  
+# mountOptions:
+#     - nfsvers=4.2
+#     - rsize=1048576
+#     - wsize=1048576
+#     - noatime
+#     - hard
+#     - nodiratime

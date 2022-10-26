@@ -1,0 +1,19 @@
+namespace: gatekeeper-system
+bases:
+  - ../../../vendor/katalog/opa/gatekeeper
+
+resources:
+  - resources/ingress.yml
+
+patches:
+  # - patches/deploy.yml
+  - patches/scheduling.yml
+
+
+images:
+  - name: registry.sighup.io/fury/gatekeeper-policy-manager:v0.5.1
+    newName: registry.sighup.io/fury/gatekeeper-policy-manager
+    newTag: v0.5.1
+  - name: registry.sighup.io/fury/openpolicyagent/gatekeeper:v3.7.0
+    newName: registry.sighup.io/fury/openpolicyagent/gatekeeper
+    newTag: v3.7.0
