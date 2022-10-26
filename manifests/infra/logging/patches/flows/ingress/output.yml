@@ -1,0 +1,17 @@
+# Copyright (c) 2022 SIGHUP s.r.l All rights reserved.
+# Use of this source code is governed by a BSD-style
+# license that can be found in the LICENSE file.
+
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Output
+metadata:
+  name: ingress-nginx
+spec:
+ syslog:
+   host: dns.domain.it
+   port: 30900
+   buffer:
+     timekey: 1m
+     timekey_wait: 10s
+     timekey_use_utc: true

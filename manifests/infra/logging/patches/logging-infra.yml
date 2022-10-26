@@ -1,0 +1,16 @@
+---
+apiVersion: logging.banzaicloud.io/v1beta1
+kind: Logging
+metadata:
+  name: infra
+spec:
+  fluentd:
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: node.kubernetes.io/role
+              operator: In
+              values:
+              - infra

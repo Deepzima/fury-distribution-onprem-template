@@ -1,0 +1,35 @@
+
+---
+
+bases:
+  - ../../vendor/katalog/logging/logging-operator
+  - ../../vendor/katalog/logging/logging-operated
+  - ../../vendor/katalog/logging/configs
+
+
+patchesStrategicMerge:
+- patches/scheduling.yml
+- patches/flows/audit/output.yml
+- patches/flows/kubernetes/k8s-flow.yml
+- patches/flows/kubernetes/cluster-output.yml
+- patches/flows/ingress/ingress-flow.yml
+- patches/flows/ingress/output.yml
+- patches/flows/events/output.yml
+
+resources:
+- patches/flows/ingress/output.yml
+
+
+images:
+  - name: registry.sighup.io/fury/banzaicloud/logging-operator:3.17.7
+    newName: registry.sighup.io/fury/banzaicloud/logging-operator
+    newTag: 3.17.7
+  - name: registry.sighup.io/fury/minio:RELEASE.2021-05-26T00-22-46Z
+    newName: registry.sighup.io/fury/minio
+    newTag: RELEASE.2021-05-26T00-22-46Z
+  - name: registry.sighup.io/fury/minio/mc:RELEASE.2021-05-18T03-39-44Z
+    newName: registry.sighup.io/fury/minio/mc
+    newTag: RELEASE.2021-05-18T03-39-44Z
+  - name: registry.sighup.io/fury/groundnuty/k8s-wait-for:v1.4
+    newName: registry.sighup.io/fury/groundnuty/k8s-wait-for
+    newTag: v1.4

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: minio
+  namespace: logging
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logging-operator
+  namespace: logging
+spec:
+  template:
+    spec:
+      nodeSelector:
+        node.kubernetes.io/role: "infra"
+      tolerations:
+      - key: node-role.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule
