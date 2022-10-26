@@ -30,3 +30,40 @@ secretGenerator:
   files:
     - alertmanager.yaml=secrets/alertmanager.yaml
     - alertmanager.tmpl=secrets/alertmanager.tmpl
+
+
+images:
+  - name: registry.sighup.io/fury/prometheus-operator/prometheus-operator:v0.53.1
+    newName: registry.sighup.io/fury/prometheus-operator/prometheus-operator
+    newTag: v0.53.1
+  - name: registry.sighup.io/fury/prometheus:v2.32.1
+    newName: registry.sighup.io/fury/openpolicyagent/gatekeeper
+    newTag: v2.32.1
+  - name: registry.sighup.io/fury/alpine:3
+    newName: registry.sighup.io/fury/alpine
+    newTag: "3"
+  - name: registry.sighup.io/fury/prometheus/node-exporter:v1.3.1
+    newName: registry.sighup.io/fury/prometheus/node-exporter
+    newTag: v1.3.1
+  - name: registry.sighup.io/fury/brancz/kube-rbac-proxy:v0.11.0
+    newName: registry.sighup.io/fury/brancz/kube-rbac-proxy
+    newTag: v0.11.0
+  - name: registry.sighup.io/fury/metrics-server:v0.5.0
+    newName: registry.sighup.io/fury/metrics-server
+    newTag: v0.5.0
+  - name: registry.sighup.io/fury/kube-state-metrics/kube-state-metrics:v2.3.0
+    newName: registry.sighup.io/fury/kube-state-metrics/kube-state-metrics
+    newTag: v2.3.0
+  - name: registry.sighup.io/fury/brancz/kube-rbac-proxy:v0.11.0
+    newName: registry.sighup.io/fury/brancz/kube-rbac-proxy
+    newTag: v0.11.0
+  - name: registry.sighup.io/fury/grafana/grafana:8.3.3
+    newName: registry.sighup.io/fury/grafana/grafana
+    newTag: 8.3.3
+  - name: registry.sighup.io/fury/kiwigrid/k8s-sidecar:1.15.0
+    newName: registry.sighup.io/fury/kiwigrid/k8s-sidecar
+    newTag: 1.15.0
+  - name: registry.sighup.io/fury/bloomberg/goldpinger:v3.3.0
+    newName: registry.sighup.io/fury/bloomberg/goldpinger
+    newTag: v3.3.0
+
