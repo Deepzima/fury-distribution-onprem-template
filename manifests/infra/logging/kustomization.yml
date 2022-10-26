@@ -2,9 +2,9 @@
 ---
 
 bases:
-  - ../../vendor/katalog/logging/logging-operator
-  - ../../vendor/katalog/logging/logging-operated
-  - ../../vendor/katalog/logging/configs
+  - ../../../vendor/katalog/logging/logging-operator
+  - ../../../vendor/katalog/logging/logging-operated
+  - ../../../vendor/katalog/logging/configs
 
 
 patchesStrategicMerge:
