@@ -3,9 +3,10 @@ versions:
   networking: v1.9.0
   ingress: v1.12.2
   monitoring: v1.14.2
-  logging: v2.0.3
+  logging: v3.0.1
   opa: v1.6.2
   dr: v1.9.2
+  auth: v0.2.0
 
 bases:
   # NETWORK
@@ -44,6 +45,11 @@ bases:
 
   # OPA
   - name: opa/gatekeeper
+
+  # AUTH
+  - name: auth/pomerium
+  - name: auth/dex
+  - name: auth/gangway
 
 roles:
   - name: on-premise

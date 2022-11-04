@@ -21,7 +21,7 @@ spec:
           service:
             name: dex
             port:
-              name: 80
+              number: 80
   tls:
   - hosts:
     - dex.nomecluster.domain.it
@@ -47,7 +47,7 @@ spec:
           service:
             name: gangway-svc
             port:
-              name: 80
+              number: 80
   tls:
   - hosts:
     - auth.nomecluster.domain.it

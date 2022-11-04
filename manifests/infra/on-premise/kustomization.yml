@@ -1,7 +1,7 @@
 ---
 bases:
-- resources/dex
-- resources/gangway
+- resources/auth/dex
+- resources/auth/gangway
 
 patchesStrategicMerge:
 - patches/scheduling.yml
@@ -19,3 +19,12 @@ secretGenerator:
   namespace: kube-system
   files:
   - secrets/gangway.yml
+
+
+images:
+  - name: registry.sighup.io/fury/dexidp/dex:v2.35.3
+    newName: registry.sighup.io/fury/dexidp/dex
+    newTag: v2.35.3
+  - name: registry.sighup.io/fury/heptio-images/gangway:v3.2.0
+    newName: registry.sighup.io/fury/heptio-images/gangway
+    newTag: v3.2.0
