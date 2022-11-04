@@ -3,11 +3,15 @@ bases:
   - ../../../vendor/katalog/opa/gatekeeper
 
 resources:
+  - gpm/rbac.yml
+  - gpm/deployment.yml
+  - gpm/service.yml
   - resources/ingress.yml
 
 patches:
   # - patches/deploy.yml
   - patches/scheduling.yml
+  - gpm/multi-cluster.yml
 
 
 images:
